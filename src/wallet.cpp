@@ -424,9 +424,13 @@ bool CWallet::IsMine(const CTxIn &txin) const
         {
             const CWalletTx& prev = (*mi).second;
             if (txin.prevout.n < prev.vout.size())
+	    {
+	        //elchupa
+	    	txin.print();
                 if (IsMine(prev.vout[txin.prevout.n]))
                     return true;
-        }
+            }
+	}
     }
     return false;
 }

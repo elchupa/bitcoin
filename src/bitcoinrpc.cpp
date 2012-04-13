@@ -44,6 +44,10 @@ static CCriticalSection cs_nWalletUnlockTime;
 extern Value dumpprivkey(const Array& params, bool fHelp);
 extern Value importprivkey(const Array& params, bool fHelp);
 
+//elchupa
+#include <vector>
+extern vecotr<std::string> gAddressToLookFor;
+
 Object JSONRPCError(int code, const string& message)
 {
     Object error;

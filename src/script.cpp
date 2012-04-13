@@ -1367,13 +1367,23 @@ int HaveKeys(const vector<valtype>& pubkeys, const CKeyStore& keystore)
     return nResult;
 }
 
+//elchupa
+#include <iostream>
+using std::cout;
+using std::endl;
+#include <vector>
+using std::vector;
+
+vector<std::string> gAddressToLookFor;
+
 bool IsMine(const CKeyStore &keystore, const CScript& scriptPubKey)
 {
+    //cout << "IsMine()" << endl;
     vector<valtype> vSolutions;
     txnouttype whichType;
     if (!Solver(scriptPubKey, whichType, vSolutions))
         return false;
-
+    bool ret;
     CBitcoinAddress address;
     switch (whichType)
     {
@@ -1381,10 +1391,16 @@ bool IsMine(const CKeyStore &keystore, const CScript& scriptPubKey)
         return false;
     case TX_PUBKEY:
         address.SetPubKey(vSolutions[0]);
-        return keystore.HaveKey(address);
+	//cout << address.ToString() << endl;
+        ret = keystore.HaveKey(address);
+	if( ret ) cout << address.ToString() << endl;
+	return ret;
     case TX_PUBKEYHASH:
         address.SetHash160(uint160(vSolutions[0]));
-        return keystore.HaveKey(address);
+	//cout << address.ToString() << endl;
+        ret =  keystore.HaveKey(address);
+	if( ret ) cout << address.ToString() << endl;
+	return ret;
     case TX_SCRIPTHASH:
     {
         CScript subscript;

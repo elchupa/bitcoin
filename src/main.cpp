@@ -11,6 +11,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 
+#include "script.h"
+
 using namespace std;
 using namespace boost;
 
@@ -400,7 +402,9 @@ int CMerkleTx::SetMerkleBranch(const CBlock* pblock)
 
 
 
-
+#include <iostream>
+using std::cout;
+using std::endl;
 
 
 bool CTransaction::CheckTransaction() const
@@ -447,6 +451,19 @@ bool CTransaction::CheckTransaction() const
             if (txin.prevout.IsNull())
                 return DoS(10, error("CTransaction::CheckTransaction() : prevout is null"));
     }
+    //elchupa
+    //cout << "Transaction Id: ";
+    //cout << GetHash().GetHex().c_str() << endl;
+    /*BOOST_FOREACH( const CTxIn &txin, vin )
+    {
+    	CBitcoinAddress address;
+	ExtractAddress( txin.scriptSig, address );	
+	cout << address.ToString() << endl;
+    }
+    cout << "Done printing TxIn's" << endl;
+    //cout << GetHash().GetHex().c_str() << endl;
+    //cout << ToString().c_str();    
+    */
 
     return true;
 }
